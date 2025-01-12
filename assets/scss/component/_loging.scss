@@ -1,0 +1,111 @@
+
+@import '../use/color';
+
+.login-section {
+    background: linear-gradient(
+        to bottom,
+        #a0d2eb,
+        #e5eaf5,
+        #d0bdf4,
+        #8458B3
+  );
+    height: 100vh;
+  
+    .card {
+      border-radius: 15px;
+      border: none;
+  
+      h2 {
+        color: $primary-color;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        i {
+          color: $primary-hover;
+        }
+      }
+  
+      .input-group {
+        span.input-group-text {
+          background-color: $primary-color;
+          color: white;
+          border: none;
+          border-radius: 8px 0 0 8px;
+        }
+  
+        input.form-control {
+          border-radius: 0 8px 8px 0;
+          &:focus {
+            border-color: $primary-color;
+            box-shadow: 0 0 10px $primary-color;
+          }
+        }
+      }
+  
+      button.btn {
+        border-radius: 8px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease-in-out;
+  
+        &.btn-animated {
+          position: relative;
+          overflow: hidden;
+          background: linear-gradient(90deg, #6a11cb, #2575fc);
+          background-size: 200% 200%;
+          animation: gradient-shift 4s infinite;
+  
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewX(-45deg);
+            transition: all 0.4s ease-in-out;
+          }
+  
+          &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            &:after {
+              left: 100%;
+            }
+          }
+  
+          &:active {
+            transform: translateY(0);
+            box-shadow: none;
+          }
+  
+          i {
+            margin-right: 8px;
+          }
+        }
+      }
+  
+      a {
+        color: $primary-color;
+        &:hover {
+          color: $primary-hover;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

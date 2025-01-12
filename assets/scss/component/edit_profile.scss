@@ -1,0 +1,95 @@
+.edit_profile{
+
+    
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --body-bg: #f8f9fa;
+}
+
+
+body {
+    background-color: var(--body-bg);
+    font-family: 'Arial', sans-serif;
+}
+
+
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    font-size: 1.5rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Form Controls */
+input.form-control {
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.3rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input.form-control:focus {
+    box-shadow: 0 0 5px rgba(var(--primary-color), 0.5);
+    border-color: var(--primary-color);
+}
+
+/* Toggle Password Button */
+.toggle-password {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--secondary-color);
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+.toggle-password i {
+    font-size: 1.2rem;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: var(--primary-color);
+    border: none;
+    color: #fff;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    padding: 0.75rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: darken(var(--primary-color), 10%);
+    transform: translateY(-2px);
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+    }
+}
+
+}

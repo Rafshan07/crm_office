@@ -1,0 +1,36 @@
+.alluser-table {
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .btn-upgrade {
+        background: var(--primary-gradient);
+        border: none;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        border-radius: var(--border-radius);
+        transition: all var(--transition-speed);
+
+        &:hover {
+            background: var(--secondary-gradient);
+            box-shadow: 0 4px 12px var(--glow-color);
+        }
+    }
+
+    .btn-delete {
+        background: #ff4d4d;
+        border: none;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        border-radius: var(--border-radius);
+        transition: all var(--transition-speed);
+
+        &:hover {
+            background: #ff3333;
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+        }
+    }
+}
