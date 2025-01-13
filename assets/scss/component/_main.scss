@@ -34,7 +34,6 @@ form h3 {
     text-transform: uppercase;
     font-weight: bold;
     background: var(--primary-gradient);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
 }
@@ -122,3 +121,106 @@ form h3 {
     margin-left: 300px;
     margin-top: 100px;
 }
+
+
+
+// Update Button Styling
+.btn-update {
+    background: linear-gradient(45deg, #ffc107, #ffdd57);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      background: linear-gradient(45deg, #e0a800, #ffd700);
+      transform: scale(1.05);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  // Delete Button Styling
+  .btn-delete {
+    background: linear-gradient(45deg, #dc3545, #f56c77);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      background: linear-gradient(45deg, #c82333, #e74c5e);
+      transform: scale(1.05);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  // Modal Styling
+  .modal-content {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  
+    h5.modal-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #495057;
+    }
+  
+    .btn-primary {
+      background: linear-gradient(45deg, #007bff, #00bfff);
+      border: none;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+  
+      &:hover {
+        background: linear-gradient(45deg, #0056b3, #008cba);
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+  
+  // Table Styling
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem;
+  
+    th {
+      background: linear-gradient(45deg, #6c757d, #adb5bd);
+      color: #fff;
+      text-align: left;
+      padding: 8px;
+      font-weight: bold;
+    }
+  
+    td {
+      padding: 8px;
+      border: 1px solid #dee2e6;
+      text-align: left;
+      color: #495057;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+  
+    tr:hover {
+      background-color: #e9ecef;
+    }
+  }
+  
+
+  
+
+
+
+
+
+  
