@@ -1,0 +1,219 @@
+@import '../use/color';
+
+
+:root {
+    --background: #9c88ff;
+    --navbar-width: 256px;
+    --navbar-dark-primary: #18283b;
+    --navbar-dark-secondary: #2c3e50;
+    --navbar-light-primary: #f5f6fa;
+    --navbar-light-secondary: #8392a5;
+    --navbar-width-min: 80px;
+}
+#nav-bar {
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background: linear-gradient(135deg, #18283b, #2c3e50);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width 0.2s, background 0.3s ease-in-out;
+    border-radius: 0 20px 20px 0; /* Add rounded corners on the right */
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5); /* Add a shadow to the right */
+}
+
+#nav-bar.collapsed {
+    width: var(--navbar-width-min);
+    border-radius: 0 10px 10px 0; /* Adjust radius for collapsed view */
+    box-shadow: 1px 0 10px rgba(0, 0, 0, 0.3); /* Lighter shadow for collapsed state */
+}
+
+#nav-bar:hover {
+    background: linear-gradient(135deg, #1f3c4b, #354b60); /* Slightly brighter gradient on hover */
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.6); /* Enhance shadow on hover */
+    border-radius: 0 25px 25px 0; /* Smooth hover effect */
+}
+
+#nav-header {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #18283b, #2c3e50);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.5s ease-in-out;
+    border-radius: 0 0 20px 20px;
+}
+
+#nav-header img {
+    max-width: 100px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+#nav-header img:hover {
+    transform: scale(1.1) rotate(5deg);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+}
+
+#nav-header h4 {
+    margin: 10px 0 0;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    animation: fadeInText 1s ease-in-out;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#nav-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: var(--navbar-light-primary);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    margin: 20px 0;
+}
+
+.nav-button:hover {
+    background: #fff;
+    color: #000;
+    border-radius: 15px 0 0 15px;
+}
+
+.nav-button .fas {
+    margin-right: 10px;
+}
+
+.nav-button.collapsed .fas {
+    margin: 0 auto;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background-color: var(--navbar-dark-secondary);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.nav-button.active .submenu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.submenu div {
+    padding: 8px 10px;
+    color: var(--navbar-light-secondary);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.submenu div:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--navbar-light-primary);
+}
+
+#nav-footer {
+    padding: 20px;
+    border-top: 1px solid var(--navbar-dark-secondary);
+    text-align: center;
+}
+
+#nav-footer img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#nav-footer h6 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--navbar-light-primary);
+}
+
+#nav-footer p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--navbar-light-secondary);
+}
+
+#charts {
+    margin: 20px 0;
+}
+
+#user-section {
+    margin: 20px 0;
+}
+
+#user-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#user-section table th, #user-section table td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+#user-section button {
+    margin-right: 10px;
+}
+
+#calendar-section {
+    margin-top: 20px;
+}
+
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#charts canvas {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+
+.no-underline {
+    text-decoration: none;
+}
+
+.nav-button a {
+    color: white;
+}

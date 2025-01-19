@@ -1,0 +1,69 @@
+.all-repot-dashboard{
+    $primary-color: #007bff;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+$light-gray: #f8f9fa;
+margin-left: 350px;
+
+.container {
+  .text-warning {
+    font-weight: bold;
+  }
+
+  .btn-primary {
+    background-color: $primary-color;
+    border: none;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  .card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+      background-color: $light-gray;
+
+      .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .badge {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+      }
+
+      .btn {
+        border-radius: 20px;
+        transition: background-color 0.3s ease;
+
+        &.btn-info {
+          background-color: $primary-color;
+
+          &:hover {
+            background-color: lighten($primary-color, 10%);
+          }
+        }
+
+        &.btn-danger {
+          background-color: $danger-color;
+
+          &:hover {
+            background-color: darken($danger-color, 10%);
+          }
+        }
+      }
+    }
+  }
+}
+}

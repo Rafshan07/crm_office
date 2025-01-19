@@ -1,0 +1,226 @@
+@import '../use/color';
+
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #6a11cb, #2575fc); /* Soft professional purple-blue */
+    --secondary-gradient: linear-gradient(135deg, #43cea2, #185a9d); /* Subtle green-blue gradient */
+    --background-color: #101820;
+    --input-background: rgba(255, 255, 255, 0.1);
+    --input-border: rgba(255, 255, 255, 0.2);
+    --text-color: #ffffff;
+    --focus-color: #43cea2; /* Matches the secondary gradient */
+    --hover-color: rgba(255, 255, 255, 0.3);
+    --border-radius: 12px;
+    --transition-speed: 0.4s;
+    --glow-color: rgba(67, 206, 162, 0.3);
+}
+
+/* Form container */
+form {
+    background: var(--background-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+/* Form heading */
+form h3 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: var(--primary-gradient);
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+/* Customer form group styling */
+.customer-form-group {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+/* Input fields */
+.customer-form-group .form-control {
+    width: 100%;
+    padding: 16px;
+    font-size: 1rem;
+    color: var(--text-color);
+    background: var(--input-background);
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    outline: none;
+    transition: all var(--transition-speed);
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+/* Floating labels */
+.customer-form-group label {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: all var(--transition-speed);
+    pointer-events: none;
+    background: var(--background-color);
+    padding: 0 8px;
+    transform: translateY(-50%);
+}
+
+/* Label transitions on focus or filled */
+.customer-form-group .form-control:focus + label,
+.customer-form-group .form-control:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 0.85rem;
+    color: var(--focus-color);
+    transform: translateY(-50%);
+}
+
+/* Glowing effect on focus */
+.customer-form-group .form-control:focus {
+    border-color: var(--focus-color);
+    box-shadow: 0 0 8px var(--focus-color);
+}
+
+.btn-primary {
+    background: var(--secondary-gradient);
+    border: none;
+    padding: 1rem 3rem; /* Increased padding for a larger button */
+    font-size: 1.25rem; /* Increased font size for better visibility */
+    font-weight: bold;
+    color: #fff;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all var(--transition-speed);
+    display: block;
+    width: auto; /* Button width is now automatic based on content */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(24, 90, 157, 0.4);
+}
+
+.btn-primary:hover {
+    background: var(--primary-gradient);
+    box-shadow: 0 8px 20px var(--glow-color);
+    transform: translateY(-3px);
+}
+
+.btn-primary:active {
+    background: var(--secondary-gradient);
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(24, 90, 157, 0.3);
+}
+
+.right{
+    margin-left: 300px;
+    margin-top: 100px;
+}
+
+
+
+// Update Button Styling
+.btn-update {
+    background: linear-gradient(45deg, #ffc107, #ffdd57);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      background: linear-gradient(45deg, #e0a800, #ffd700);
+      transform: scale(1.05);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  // Delete Button Styling
+  .btn-delete {
+    background: linear-gradient(45deg, #dc3545, #f56c77);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      background: linear-gradient(45deg, #c82333, #e74c5e);
+      transform: scale(1.05);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  // Modal Styling
+  .modal-content {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  
+    h5.modal-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #495057;
+    }
+  
+    .btn-primary {
+      background: linear-gradient(45deg, #007bff, #00bfff);
+      border: none;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+  
+      &:hover {
+        background: linear-gradient(45deg, #0056b3, #008cba);
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+  
+  // Table Styling
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem;
+  
+    th {
+      background: linear-gradient(45deg, #6c757d, #adb5bd);
+      color: #fff;
+      text-align: left;
+      padding: 8px;
+      font-weight: bold;
+    }
+  
+    td {
+      padding: 8px;
+      border: 1px solid #dee2e6;
+      text-align: left;
+      color: #495057;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+  
+    tr:hover {
+      background-color: #e9ecef;
+    }
+  }
+  
+
+  
+
+
+
+
+
+  
