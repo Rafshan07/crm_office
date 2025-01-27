@@ -79,51 +79,42 @@
 
         <div class="col-md-9 col-lg-10 p-4 right">
             <div class="mb-3">
-                <button class="btn btn-primary " onclick="location.href='staff_account.html'">Staff Create</button><br>
+                <button class="btn btn-primary " onclick="location.href='_manage_users_create.html'">customer Create</button><br>
                 <button class="btn btn-primary " onclick="location.href='salesman_id.html'">Salesman Create</button>
             </div>
-            <h3>Customer Account</h3>
+            <h3>Create Staff Account</h3>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="form-group customer-form-group">
+                <input type="text" class="form-control" id="staff-name" name="staff_name" placeholder=" " required>
+                <label for="staff-name">Staff Name</label>
+            </div>
+            <div class="form-group customer-form-group">
+                <input type="text" class="form-control" id="staff-id" name="staff_id" placeholder=" " required>
+                <label for="staff-id">Staff ID</label>
+            </div>
+            <div class="form-group customer-form-group">
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                <label for="image">Image</label>
+            </div>
+            <div class="form-group customer-form-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
+                <label for="email">Email</label>
+            </div>
+            <div class="form-group customer-form-group">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder=" " required>
+                <label for="phone">Phone</label>
+            </div>
+            <div class="form-group customer-form-group">
+                <textarea class="form-control" id="address" name="address" placeholder=" " rows="4" required></textarea>
+                <label for="address">Address</label>
+            </div>
+            <div class="form-group customer-form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder=" " required>
+                <label for="password">Password</label>
+            </div>
             
-            <form action="#" method="POST" enctype="multipart/form-data">
-                <div class="form-group customer-form-group">
-                    <input type="text" class="form-control" id="customer-id" name="customer_id" placeholder=" " required>
-                    <label for="customer-id">Customer ID</label>
-                </div>
-                <div class="form-group customer-form-group">
-                    <input type="text" class="form-control" id="name" name="name" placeholder=" " required>
-                    <label for="name">Full Name</label>
-                </div>
-                <div class="form-group customer-form-group">
-                    <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
-                    <label for="email">Email</label>
-                </div>
-                <div class="form-group customer-form-group">
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder=" " required>
-                    <label for="phone">Phone</label>
-                </div>
-                <div class="form-group customer-form-group">
-                    <textarea class="form-control" id="address" name="address" placeholder=" " rows="4" required></textarea>
-                    <label for="address">Address</label>
-                </div>
-                <div class="form-group customer-form-group">
-                    <input type="text" class="form-control" id="company" name="company" placeholder=" " required>
-                    <label for="company">Company</label>
-                </div>
-                <div class="form-group customer-form-group">
-                    <input type="text" class="form-control" id="industry" name="industry" placeholder=" " required>
-                    <label for="industry">Industry</label>
-                </div>
-                <div class="form-group customer-form-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder=" " required>
-                    <label for="password">Password</label>
-                </div>
-                <!-- Photo Upload Section -->
-                <div class="form-group customer-form-group">
-                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
-                    <label for="photo">Upload Photo</label>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
-            </form>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
         </div>        
 
             
