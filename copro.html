@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Apicorn CRM</title>
+</head>
+<body class="adminpage">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-lg-2 p-0" id="nav-bar">
+                <div id="nav-header" class="d-flex align-items-center p-3">
+                    <img src="./assets/image/logo.png" alt="Logo">
+                    <h4> &nbsp;cous <br> &nbsp;tomer</h4>
+                </div>
+                <!-- Menu Items -->
+                <div id="nav-content">
+                    <div class="nav-button">
+                        <i class="fas fa-tachometer-alt"></i><a href="./main.html" class="no-underline"><span class="deshboard">Dashboard</span></a>
+                    </div>
+                    <div class="nav-button">
+                        <i class="fa-brands fa-android"></i>
+                        <span class="ms-2">Product</span>
+                        <div class="submenu">
+                            <a href="./add_product.html" class="no-underline">
+                                <div>all Product</div>
+                            </a>
+                            <a href="./order_details.html" class="no-underline">
+                                <div>order details</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="nav-button">
+                        <a href="./opprtunity.html" class="nav-link d-flex align-items-center">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span class="ms-2">Message</span>
+                        </a>
+                    </div>    
+                    <div class="nav-button">
+                        <a href="./opprtunity.html" class="nav-link d-flex align-items-center">
+                            <i class="fa-regular fa-comment"></i>
+                            <span class="ms-2">Feedback</span>
+                        </a>
+                    </div>              
+                    <a href="./customer_data.html" class="nav-button text-decoration-none">
+                        <i class="fa-solid fa-headset"></i>
+                        <span class="ms-2">support</span>
+                    </a>    
+                </div>
+                
+                <!-- Footer Section -->
+                <div id="nav-footer" class="p-3">
+                    <img src="./assets/image/user.png" alt="User">
+                    <h6>Setuuuuuuuu</h6>
+                    <p>sales</p>
+                </div>
+                <div class="nav-button">
+                    <a href="./_logout.html" class="no-underline">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-9 col-lg-10">
+                <div class="d-flex justify-content-end p-3">
+                    <div class="popup-wrapper">
+                        <button class="popup-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </button>
+                        <div class="popup-content">
+                            <div class="popup-header">Notifications</div>
+                            <ul class="popup-list">
+                                <li><a href="#"><i class="fas fa-user-plus"></i> New lead added</a></li>
+                                <li><a href="#"><i class="fas fa-box"></i> Product updated</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="popup-wrapper">
+                        <button class="popup-btn">
+                            <i class="fas fa-comment-dots"></i>
+                            <span class="badge">5</span>
+                        </button>
+                        <div class="popup-content">
+                            <div class="popup-header">Messages</div>
+                            <ul class="popup-list">
+                                <li><a href="#"><i class="fas fa-envelope"></i> John Doe: Hello!</a></li>
+                                <li><a href="#"><i class="fas fa-envelope"></i> Jane Smith: Meeting?</a></li>
+                                <li><a href="#"><i class="fas fa-envelope"></i> Alex: Updates?</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-lg-10 right">
+                <div class="products-section p-3">
+                    <h2>All Software and IT Products</h2>
+                    <div class="row">
+                        <!-- Software Product 1 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <img src="./assets/image/logo.png" alt="Payment Software" class="product-image">
+                                <div class="product-details">
+                                    <h5 class="product-name">Global Payment Software</h5>
+                                    <p class="product-description">An all-in-one payment gateway solution to handle global transactions and multi-currency support.</p>
+                                    <p class="product-price">৳4,500</p>
+                                    <button class="btn btn-primary purchase-btn">Purchase</button>
+                                    <button class="btn btn-secondary details-btn" data-bs-toggle="modal" data-bs-target="#productDetailsModal1">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Software Product 2 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <img src="./assets/image/logo.png" alt="Software 2" class="product-image">
+                                <div class="product-details">
+                                    <h5 class="product-name">Payment Integration API</h5>
+                                    <p class="product-description">Easy-to-integrate payment API for businesses looking to accept online payments globally.</p>
+                                    <p class="product-price">৳3,000</p>
+                                    <button class="btn btn-primary purchase-btn">Purchase</button>
+                                    <button class="btn btn-secondary details-btn" data-bs-toggle="modal" data-bs-target="#productDetailsModal2">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Software Product 3 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <img src="./assets/image/logo.png" alt="Software 3" class="product-image">
+                                <div class="product-details">
+                                    <h5 class="product-name">Multi-Currency Wallet</h5>
+                                    <p class="product-description">Manage multiple currencies and make international payments with ease.</p>
+                                    <p class="product-price">৳6,000</p>
+                                    <button class="btn btn-primary purchase-btn">Purchase</button>
+                                    <button class="btn btn-secondary details-btn" data-bs-toggle="modal" data-bs-target="#productDetailsModal3">Details</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <img src="./assets/image/logo.png" alt="Payment Software" class="product-image">
+                                <div class="product-details">
+                                    <h5 class="product-name">Global Payment Software</h5>
+                                    <p class="product-description">An all-in-one payment gateway solution to handle global transactions and multi-currency support.</p>
+                                    <p class="product-price">৳4,500</p>
+                                    <button class="btn btn-primary purchase-btn">Purchase</button>
+                                    <button class="btn btn-secondary details-btn" data-bs-toggle="modal" data-bs-target="#productDetailsModal1">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Software Product 2 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <img src="./assets/image/logo.png" alt="Software 2" class="product-image">
+                                <div class="product-details">
+                                    <h5 class="product-name">Payment Integration API</h5>
+                                    <p class="product-description">Easy-to-integrate payment API for businesses looking to accept online payments globally.</p>
+                                    <p class="product-price">৳3,000</p>
+                                    <button class="btn btn-primary purchase-btn">Purchase</button>
+                                    <button class="btn btn-secondary details-btn" data-bs-toggle="modal" data-bs-target="#productDetailsModal2">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Software Product 3 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                <img src="./assets/image/logo.png" alt="Software 3" class="product-image">
+                                <div class="product-details">
+                                    <h5 class="product-name">Multi-Currency Wallet</h5>
+                                    <p class="product-description">Manage multiple currencies and make international payments with ease.</p>
+                                    <p class="product-price">৳6,000</p>
+                                    <button class="btn btn-primary purchase-btn">Purchase</button>
+                                    <button class="btn btn-secondary details-btn" data-bs-toggle="modal" data-bs-target="#productDetailsModal3">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <!-- Modal for Product 1 -->
+    <div class="modal fade" id="productDetailsModal1" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailsModalLabel">Global Payment Software</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Details:</strong> Global Payment Software allows businesses to easily handle transactions across borders, supporting multiple currencies and payment methods like credit cards, mobile wallets, and bank transfers.</p>
+                    <p><strong>Price:</strong> ৳4,500</p>
+                    <p><strong>Availability:</strong> In stock</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Product 2 -->
+    <div class="modal fade" id="productDetailsModal2" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailsModalLabel">Payment Integration API</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Details:</strong> A fully customizable and easy-to-integrate API to help businesses accept payments globally with ease. Supports various payment methods such as PayPal, Stripe, and local bank transfers.</p>
+                    <p><strong>Price:</strong> ৳3,000</p>
+                    <p><strong>Availability:</strong> In stock</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Product 3 -->
+    <div class="modal fade" id="productDetailsModal3" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailsModalLabel">Multi-Currency Wallet</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Details:</strong> Multi-Currency Wallet allows users to store and manage different currencies, enabling easy cross-border transactions and international payments with minimal fees.</p>
+                    <p><strong>Price:</strong> ৳6,000</p>
+                    <p><strong>Availability:</strong> In stock</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/nav.js"></script>
+
+    <style>
+
+
+
+
+            
+.popup-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 0 10px;
+        }
+    
+        .popup-btn {
+            background: linear-gradient(135deg, #007bff, #4f9cfd);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease-in-out;
+        }
+    
+        .popup-btn:hover {
+            background: linear-gradient(135deg, #0056b3, #3b8df5);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+    
+        .popup-btn i {
+            font-size: 20px;
+        }
+    
+        .popup-btn .badge {
+            background: red;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 8px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    
+        /* Popup Container */
+        .popup-content {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            min-width: 300px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
+    
+        .popup-wrapper:hover .popup-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    
+        .popup-header {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+    
+        .popup-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        .popup-list li {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+    
+        .popup-list li:hover {
+            background: #f9fbfd;
+            cursor: pointer;
+        }
+    
+        .popup-list li a {
+            text-decoration: none;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+    
+        .popup-list li a i {
+            font-size: 18px;
+            color: #007bff;
+        }
+    
+        .popup-list li:last-child {
+            border-bottom: none;
+        }
+        .products-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-details {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #007bff;
+            margin: 10px 0;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</body>
+</html>

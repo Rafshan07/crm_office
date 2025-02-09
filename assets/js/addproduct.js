@@ -1,5 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const productTable = document.getElementById('productTableBody'); // Updated selection
+    const productTable = document.querySelector('table tbody');
+    const photoInput = document.getElementById('productPhoto');
+    const photoPreview = document.getElementById('photoPreview');
+
+    // Show preview of uploaded photo
+    photoInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                photoPreview.src = e.target.result;
+                photoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            photoPreview.src = '';
+            photoPreview.style.display = 'none';
+        }
+    });
 
     // Add Product
     document.querySelector('#addProductForm').addEventListener('submit', function (event) {
@@ -11,18 +29,32 @@ document.addEventListener('DOMContentLoaded', function () {
         const price = document.getElementById('productPrice').value;
         const stockLevel = document.getElementById('stockLevel').value;
 
-        appendProductRow(productId, name, category, price, stockLevel);
+        // Check if a photo is uploaded
+        let photoSrc = '';
+        const file = photoInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                photoSrc = e.target.result;
+                appendProductRow(productId, photoSrc, name, category, price, stockLevel);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            appendProductRow(productId, '', name, category, price, stockLevel);
+        }
 
         // Reset form and modal
         this.reset();
+        photoPreview.style.display = 'none';
         bootstrap.Modal.getInstance(document.querySelector('#addProductModal')).hide();
     });
 
     // Add row to the table
-    function appendProductRow(id, name, category, price, stock) {
+    function appendProductRow(id, photo, name, category, price, stock) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${id}</td>
+            <td>${photo ? `<img src="${photo}" alt="${name}" width="50">` : 'No Photo'}</td>
             <td>${name}</td>
             <td>${category}</td>
             <td>${price}</td>
@@ -47,10 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Populate modal with current product details
             document.getElementById('productId').value = cells[0].textContent;
-            document.getElementById('productName').value = cells[1].textContent;
-            document.getElementById('productCategory').value = cells[2].textContent;
-            document.getElementById('productPrice').value = cells[3].textContent;
-            document.getElementById('stockLevel').value = cells[4].textContent;
+            photoPreview.src = cells[1].querySelector('img')?.src || '';
+            photoPreview.style.display = cells[1].querySelector('img') ? 'block' : 'none';
+            document.getElementById('productName').value = cells[2].textContent;
+            document.getElementById('productCategory').value = cells[3].textContent;
+            document.getElementById('productPrice').value = cells[4].textContent;
+            document.getElementById('stockLevel').value = cells[5].textContent;
 
             // Remove existing row after editing
             row.remove();
