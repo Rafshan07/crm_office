@@ -150,7 +150,7 @@ $read = $db->select($query);
                 <!-- Footer Section -->
                 <div id="nav-footer" class="p-3">
                     <img src="./assets/image/user.png" alt="User">
-                    <h6><?= htmlspecialchars($user_name); ?></h6>
+                    <h6>Sales</h6>
                     <p>Sales</p>
                 </div>
                 <div class="nav-button">
@@ -222,46 +222,56 @@ $read = $db->select($query);
         </div>
 
         <!-- Table displaying opportunities -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Opportunity ID</th>
-                        <th>Title</th>
-                        <th>Stage</th>
-                        <th>Expected Revenue</th>
-                        <th>Close Date</th>
-                        <th>Probability (%)</th>
-                        <th>Customer ID</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($read) {
-                        while ($row = $read->fetch(PDO::FETCH_ASSOC)) { ?>
-                            <tr>
-                                <td><?php echo $row['OpportunityID']; ?></td>
-                                <td><?php echo $row['Title']; ?></td>
-                                <td><?php echo $row['Stage']; ?></td>
-                                <td><?php echo $row['ExpectedRevenue']; ?></td>
-                                <td><?php echo $row['CloseDate']; ?></td>
-                                <td><?php echo $row['Probability']; ?></td>
-                                <td><?php echo $row['CustomerID']; ?></td>
-                                <td>
-                                    <a href="lib/editOppurtinity.php?id=<?php echo $row['OpportunityID']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="lib/deleteOppurtinity.php?id=<?php echo $row['OpportunityID']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?');">Delete</a>
-                                </td>
-                            </tr>
-                        <?php }
-                    } else { ?>
-                        <tr>
-                            <td colspan="8" class="text-center">No Data Found!</td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Opportunity Table -->
+                <div class="card shadow-lg rounded-3">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Opportunity ID</th>
+                                        <th>Title</th>
+                                        <th>Stage</th>
+                                        <th>Expected Revenue</th>
+                                        <th>Close Date</th>
+                                        <th>Probability (%)</th>
+                                        <th>Customer ID</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if ($read) {
+                                        while ($row = $read->fetch(PDO::FETCH_ASSOC)) { ?>
+                                            <tr>
+                                                <td><?php echo $row['OpportunityID']; ?></td>
+                                                <td><?php echo $row['Title']; ?></td>
+                                                <td><?php echo $row['Stage']; ?></td>
+                                                <td>$<?php echo number_format($row['ExpectedRevenue'], 2); ?></td>
+                                                <td><?php echo $row['CloseDate']; ?></td>
+                                                <td><?php echo $row['Probability']; ?>%</td>
+                                                <td><?php echo $row['CustomerID']; ?></td>
+                                                <td>
+                                                    <a href="lib/editOppurtinity.php?id=<?php echo $row['OpportunityID']; ?>" class="btn btn-warning btn-sm shadow-sm">Edit</a>
+                                                    <a href="lib/deleteOppurtinity.php?id=<?php echo $row['OpportunityID']; ?>" class="btn btn-danger btn-sm shadow-sm" onclick="return confirm('Are you sure to delete?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php }
+                                    } else { ?>
+                                        <tr>
+                                            <td colspan="8" class="text-center text-muted">No Data Found!</td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 
     <!-- CSS for Popup Form -->
     <style>

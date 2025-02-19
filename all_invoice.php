@@ -103,45 +103,68 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     $read = $db->select($query);
 
     if ($read):
+?>
 
-    ?>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Card Container -->
+                <div class="card shadow-sm border-light rounded-4">
+                    <div class="card-body">
+                        <!-- Title -->
+                        <h2 class="text-center text-primary mb-4">All Invoices</h2>
 
-
-        <div class="col-md-9 col-lg-10 p-4 right">
-            <h2 class="mb-4">All Invoices</h2>
-            <table class="table table-striped table-hover invoice-table">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Invoice ID</th>
-                        <th>PO Number</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="invoice-tbody">
-                    <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
-
-                        <tr data-invoice-id="<?php echo $row['id']; ?>">
-                            <td><?php echo $row['id'] ?></td>
-                            <td><?php echo $row['po_number'] ?></td>
-                            <td><?php echo $row['invoice_date'] ?></td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" onclick="showInvoiceModal(<?php echo $row['id']; ?>)">See</button>
-                                <button class="btn btn-danger btn-sm" onclick="printInvoice()">Print</button>
-                                <button class="btn btn-danger btn-sm" onclick="deleteInvoice(<?php echo $row['id']; ?>)">Delete</button>
-
-                            </td>
-                        </tr>
-
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Invoice ID</th>
+                                        <th>PO Number</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="invoice-tbody">
+                                    <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
+                                        <tr>
+                                            <td><?php echo $row['id'] ?></td>
+                                            <td><?php echo $row['po_number'] ?></td>
+                                            <td><?php echo $row['invoice_date'] ?></td>
+                                            <td>
+                                                <!-- Action Buttons with Icons -->
+                                                <button class="btn btn-sm btn-outline-info" data-bs-toggle="tooltip" title="View Invoice" onclick="showInvoiceModal(<?php echo $row['id']; ?>)">
+                                                    <i class="fas fa-eye"></i> View
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-warning" data-bs-toggle="tooltip" title="Print Invoice" onclick="printInvoice()">
+                                                    <i class="fas fa-print"></i> Print
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Delete Invoice" onclick="deleteInvoice(<?php echo $row['id']; ?>)">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-    <?php endif; ?>
-    </tbody>
-    </table>
     </div>
+
+    <!-- Tooltip Initialization -->
+    <script>
+        // Initialize Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+
+<?php endif; ?>
+
 
 
 

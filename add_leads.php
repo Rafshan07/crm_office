@@ -124,10 +124,10 @@ if ($_POST) {
 
             <!-- Footer Section -->
             <div id="nav-footer" class="p-3">
-                <img src="./assets/image/user.png" alt="User">
-                <h6><?= htmlspecialchars($user_name); ?></h6>
-                <p>Sales</p>
-            </div>
+                    <img src="./assets/image/user.png" alt="User">
+                    <h6>Sales</h6>
+                    <p>Sales</p>
+                </div>
             <div class="nav-button">
                 <a href="lib/logout.php" class="no-underline">
                     <i class="fa-solid fa-right-from-bracket"></i>

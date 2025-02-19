@@ -97,100 +97,133 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     </div>
   </div>
 
-    <?php
+  <?php
     $db = new database();
     $query = "SELECT * FROM customer";
     $read = $db->select($query);
 
     if ($read):
-
-    ?>
-
+?>
         <div class="col-md-9 col-lg-10 p-4 right">
-            <h2 class="mb-4">All Customer</h2>
-            <table class="table table-striped table-hover alluser-table">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Customer ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Company</th>
-                        <th>Industry</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
-
-                        <tr>
-                            <td><?php echo $row['CustomerID'] ?></td>
-                            <td><?php echo $row['Name'] ?></td>
-                            <td><?php echo $row['Email'] ?></td>
-                            <td><?php echo $row['Phone'] ?></td>
-                            <td><?php echo $row['Address'] ?></td>
-                            <td><?php echo $row['Company'] ?></td>
-                            <td><?php echo $row['Industry'] ?></td>
-                            <td>
-                                <a class="btn btn-warning" href="lib/editCustomer.php?CustomerID=<?php echo $row['CustomerID']; ?>">
-                                    Edit
-                                </a>
-                                <a class="btn btn-danger" href="lib/deleteCustomer.php?id=<?php echo $row['CustomerID'] ?>" onclick="return confirm('Are you sure to delete?');">Delete</a>
-                            </td>
-                        </tr>
-
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+            <div class="card shadow-lg rounded-3">
+                <div class="card-body">
+                    <h2 class="mb-4 text-center text-primary">All Customers</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered shadow-sm rounded-3">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Customer ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Company</th>
+                                    <th>Industry</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
+                                    <tr>
+                                        <td><?php echo $row['CustomerID'] ?></td>
+                                        <td><?php echo $row['Name'] ?></td>
+                                        <td><?php echo $row['Email'] ?></td>
+                                        <td><?php echo $row['Phone'] ?></td>
+                                        <td><?php echo $row['Address'] ?></td>
+                                        <td><?php echo $row['Company'] ?></td>
+                                        <td><?php echo $row['Industry'] ?></td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm shadow-sm" href="lib/editCustomer.php?CustomerID=<?php echo $row['CustomerID']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Customer">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <a class="btn btn-danger btn-sm shadow-sm" href="lib/deleteCustomer.php?id=<?php echo $row['CustomerID'] ?>" onclick="return confirm('Are you sure to delete?');" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Customer">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    <?php endif; ?>
-    <?php
+<?php endif; ?>
+
+<?php
     $query = "SELECT * FROM user";
     $read = $db->select($query);
 
     if ($read):
-
-    ?>
+?>
         <div class="col-md-9 col-lg-10 p-4 right">
-            <h2 class="mb-4">All Employee</h2>
-            <table class="table table-striped table-hover alluser-table">
-                <thead class="table-dark">
-                    <tr>
-                        <th>UserID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Depertment</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
-
-                        <tr>
-                            <td><?php echo $row['UserID'] ?></td>
-                            <td><?php echo $row['Name'] ?></td>
-                            <td><?php echo $row['Email'] ?></td>
-                            <td><?php echo $row['role'] ?></td>
-                            <td><?php echo $row['Department'] ?></td>
-                            <td>
-                                <a class="btn btn-warning" href="lib/editEmployee.php?UserID=<?php echo $row['UserID']; ?>">
-                                    Edit
-                                </a>
-                                <a class="btn btn-danger" href="lib/deleteEmployee.php?id=<?php echo $row['UserID'] ?>" onclick="return confirm('Are you sure to delete?');">Delete</a>
-                            </td>
-                        </tr>
-
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+            <div class="card shadow-lg rounded-3">
+                <div class="card-body">
+                    <h2 class="mb-4 text-center text-success">All Employees</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered shadow-sm rounded-3">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>UserID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
+                                    <tr>
+                                        <td><?php echo $row['UserID'] ?></td>
+                                        <td><?php echo $row['Name'] ?></td>
+                                        <td><?php echo $row['Email'] ?></td>
+                                        <td><?php echo $row['role'] ?></td>
+                                        <td><?php echo $row['Department'] ?></td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm shadow-sm" href="lib/editEmployee.php?UserID=<?php echo $row['UserID']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Employee">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <a class="btn btn-danger btn-sm shadow-sm" href="lib/deleteEmployee.php?id=<?php echo $row['UserID'] ?>" onclick="return confirm('Are you sure to delete?');" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Employee">
+                                                <i class="fas fa-trash-alt"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    <?php endif; ?>
-    <script src="./assets/js/all_user.js"></script>
+<?php endif; ?>
+
+<!-- Success/Error Alerts -->
+<?php if(isset($success_message)): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> <?php echo $success_message; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php elseif(isset($error_message)): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> <?php echo $error_message; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<script>
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
+
+<script src="./assets/js/all_user.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="./assets/js/nav.js"></script>
+
 </body>
 
 </html>

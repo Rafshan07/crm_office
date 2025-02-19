@@ -31,7 +31,7 @@ class database
         try {
             // Prepare the query
             $stmt = $this->pdo->prepare($query);
-    
+
             // Bind the parameters if there are any
             if (!empty($params)) {
                 foreach ($params as $key => $param) {
@@ -43,10 +43,10 @@ class database
                     }
                 }
             }
-    
+
             // Execute the query
             $stmt->execute();
-    
+
             // Return the result if rows exist
             if ($stmt->rowCount() > 0) {
                 return $stmt;
@@ -57,10 +57,6 @@ class database
             die("Query failed! " . $e->getMessage());
         }
     }
-    
-    
-
-
 
     public function insert($query, $params = [])
     {

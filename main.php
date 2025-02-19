@@ -26,6 +26,18 @@ $totalUsers = $totalUsersStmt ? $totalUsersStmt->fetchColumn() : 0;
 $totalProducts = $totalProductsStmt ? $totalProductsStmt->fetchColumn() : 0;
 $totalInvoices = $totalInvoicesStmt ? $totalInvoicesStmt->fetchColumn() : 0;
 
+// Get the total sales for the current month
+$currentMonth = date('Y-m');
+$salesThisMonthQuery = "
+    SELECT SUM(ii.amount) 
+    FROM invoice_items ii
+    JOIN invoices i ON ii.invoice_id = i.id
+    WHERE DATE_FORMAT(i.created_at, '%Y-%m') = '$currentMonth'
+";
+
+// Execute the query and get the result
+$salesThisMonthStmt = $db->select($salesThisMonthQuery);
+$salesThisMonth = $salesThisMonthStmt ? $salesThisMonthStmt->fetchColumn() : 0;
 
 if (isset($_SESSION['userid'])) {
     $userId = $_SESSION['userid']; // Get the user ID from the session
@@ -42,8 +54,6 @@ if (isset($_SESSION['userid'])) {
 } else {
     $loggedInUserName = 'Guest'; // Default name if no user is logged in
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -55,55 +65,12 @@ if (isset($_SESSION['userid'])) {
     <link rel="stylesheet" href="assets/css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>apcorn crm</title>
+    <title>Admin Dashboard</title>
     <style>
-        /* Chat icon styling */
-        .chat-container {
-            position: fixed;
-            top: 20px;
-            right: 30px;
-            z-index: 1000;
-        }
-
-        .chat-icon {
-            font-size: 1.8rem;
-            color: #fff;
-            cursor: pointer;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            padding: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .chat-dropdown {
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 0;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 200px;
-            padding: 10px 0;
-        }
-
-        .chat-dropdown a {
-            display: block;
-            padding: 12px 20px;
-            text-decoration: none;
-            color: #333;
-            transition: background 0.3s ease;
-        }
-
-        .chat-dropdown a:hover {
-            background: #f1f1f1;
-        }
-
-        /* Admin Dashboard Styling */
+        /* Dashboard Styling */
         .dashboard {
             padding: 30px;
             margin-left: 250px;
-            /* Leave space for sidebar */
             background: #f5f5f5;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -240,11 +207,17 @@ if (isset($_SESSION['userid'])) {
                         </div>
                     </div>
                     <div class="nav-button">
+                        <a href="./view_tickets.php" class="nav-link d-flex align-items-center">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span class="ms-2">Ticket</span>&nbsp;
+                        </a>
+                    </div>
+                    <div class="nav-button">
                         <i class="fa-solid fa-file-invoice"></i>
                         <span>Invoice</span>
                         <div class="submenu">
                             <a href="./invoice.php" class="no-underline">
-                                <div>Generatte Invoice</div>
+                                <div>Generate Invoice</div>
                             </a>
                             <a href="./all_invoice.php" class="no-underline">
                                 <div>All Invoice</div>
@@ -300,6 +273,17 @@ if (isset($_SESSION['userid'])) {
                                 </div>
                                 <i class="fas fa-file-invoice card-icon"></i>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Sales This Month -->
+                    <div class="col">
+                        <div class="card">
+                            <div>
+                                <h3>Total Sales This Month</h3>
+                                <p>$<?php echo number_format($salesThisMonth, 2); ?></p>
+                            </div>
+                            <i class="fas fa-dollar-sign card-icon"></i>
                         </div>
                     </div>
 

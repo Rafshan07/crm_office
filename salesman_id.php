@@ -120,8 +120,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
     <div class="col-md-9 col-lg-10 p-4 right">
         <div class="mb-3">
-            <button class="btn btn-primary " onclick="location.href='_manage_users_create.php'">customer Create</button><br>
-            <button class="btn btn-primary " onclick="location.href='staff_account.php'">stuff Create</button>
+            <button class="btn btn-primary " onclick="location.href='_manage_users_create.php'">Create Customer Account</button><br>
         </div>
         <h3>Create Busnesses devoloper ID</h3>
         <form action="#" method="POST" enctype="multipart/form-data">

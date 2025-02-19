@@ -113,104 +113,111 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             <div class="row">
                 <!-- Order Table Section -->
                 <div class="col-md-9 col-lg-10 p-4 table-wrapper right">
-                    <h4>All Orders</h4>
+                    <h4 class="mb-4">All Orders</h4>
 
                     <!-- Order Table -->
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Customer Name</th>
-                                <th>Customer Phone</th>
-                                <th>Order Date</th>
-                                <th>Status</th>
-                                <th>Total Amount</th>
-                                <th>Customer ID</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if ($orders): ?>
-                                <?php foreach ($orders as $order): ?>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead class="table-light">
                                     <tr>
-                                        <td>#<?= $order['OrderID']; ?></td>
-                                        <td><?= $order['Name']; ?></td>
-                                        <td>+88<?= $order['Phone']; ?></td>
-                                        <td><?= $order['OrderDate']; ?></td>
-                                        <td>
-                                            <?php
-                                            $status = strtolower($order['Status']);
-                                            $status_icon = [
-                                                'pending' => '<span class="badge bg-warning"><i class="fas fa-clock"></i> Pending</span>',
-                                                'completed' => '<span class="badge bg-success"><i class="fas fa-check-circle"></i> Completed</span>',
-                                                'cancelled' => '<span class="badge bg-danger"><i class="fas fa-times-circle"></i> Cancelled</span>' // Fixed typo here
-                                            ];
-                                            echo $status_icon[$status] ?? '<span class="badge bg-secondary">Unknown</span>';
-                                            ?>
-                                        </td>
-                                        <td>$<?= $order['TotalAmount']; ?></td>
-                                        <td><?= $order['CustomerID']; ?></td>
-                                        <td>
-                                            <!-- View Details Button -->
-                                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#orderDetailsModal" data-order-id="<?= $order['OrderID']; ?>">View Details</button>
-                                        </td>
+                                        <th>Order ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Customer Phone</th>
+                                        <th>Order Date</th>
+                                        <th>Status</th>
+                                        <th>Total Amount</th>
+                                        <th>Customer ID</th>
+                                        <th>Actions</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="7">No orders found.</td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                    <?php if ($orders): ?>
+                                        <?php foreach ($orders as $order): ?>
+                                            <tr>
+                                                <td>#<?= $order['OrderID']; ?></td>
+                                                <td><?= $order['Name']; ?></td>
+                                                <td>+88<?= $order['Phone']; ?></td>
+                                                <td><?= $order['OrderDate']; ?></td>
+                                                <td>
+                                                    <?php
+                                                    $status = strtolower($order['Status']);
+                                                    $status_icon = [
+                                                        'pending' => '<span class="badge bg-warning text-dark"><i class="fas fa-clock"></i> Pending</span>',
+                                                        'completed' => '<span class="badge bg-success"><i class="fas fa-check-circle"></i> Completed</span>',
+                                                        'cancelled' => '<span class="badge bg-danger"><i class="fas fa-times-circle"></i> Cancelled</span>',
+                                                    ];
+                                                    echo $status_icon[$status] ?? '<span class="badge bg-secondary">Unknown</span>';
+                                                    ?>
+                                                </td>
+                                                <td>$<?= number_format($order['TotalAmount'], 2); ?></td>
+                                                <td><?= $order['CustomerID']; ?></td>
+                                                <td>
+                                                    <!-- View Details Button -->
+                                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#orderDetailsModal" data-order-id="<?= $order['OrderID']; ?>">View Details</button>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="8" class="text-center text-muted">No orders found.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal for Order Details -->
-    <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="orderDetailsContent">
-                    <!-- Order details will be dynamically loaded here -->
-                    Loading...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- Modal for Order Details -->
+        <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="orderDetailsContent">
+                        <!-- Order details will be dynamically loaded here -->
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="./assets/js/nav.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="./assets/js/nav.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const orderDetailsModal = document.getElementById('orderDetailsModal');
-            orderDetailsModal.addEventListener('show.bs.modal', function(event) {
-                const button = event.relatedTarget;
-                const orderId = button.getAttribute('data-order-id');
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const orderDetailsModal = document.getElementById('orderDetailsModal');
+                orderDetailsModal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    const orderId = button.getAttribute('data-order-id');
 
-                // Fetch the order details based on order_id
-                fetch(`lib/view_details.php?order_id=${orderId}`)
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById('orderDetailsContent').innerHTML = data;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching order details:', error);
-                        document.getElementById('orderDetailsContent').innerHTML = 'Error loading order details.';
-                    });
+                    // Fetch the order details based on order_id
+                    fetch(`lib/view_details.php?order_id=${orderId}`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('orderDetailsContent').innerHTML = data;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching order details:', error);
+                            document.getElementById('orderDetailsContent').innerHTML = 'Error loading order details.';
+                        });
+                });
             });
-        });
-    </script>
+        </script>
 
 </body>
 

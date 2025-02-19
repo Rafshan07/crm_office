@@ -95,7 +95,7 @@ if (isset($_SESSION['userid'])) {
                 <!-- Footer Section -->
                 <div id="nav-footer" class="p-3">
                     <img src="./assets/image/user.png" alt="User">
-                    <h6><?= htmlspecialchars($user_name); ?></h6>
+                    <h6>Sales</h6>
                     <p>Sales</p>
                 </div>
                 <div class="nav-button">
@@ -115,48 +115,56 @@ if (isset($_SESSION['userid'])) {
     $read = $db->select($query);
 
     if ($read):
+?>
 
-    ?>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Customer Data Table Section -->
+        <div class="col-md-9 col-lg-10 p-4 table-wrapper right">
+            <h3 class="mb-4">Customer Data</h3>
 
-        <div class="col-md-9 col-lg-10 p-4 right">
-            <h3>Customer Data</h3>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Customer ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Company</th>
-                        <th>Industry</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="customer-data-table">
-
-                    <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
-
-                        <tr>
-                            <td><?php echo $row['CustomerID'] ?></td>
-                            <td><?php echo $row['Name'] ?></td>
-                            <td><?php echo $row['Email'] ?></td>
-                            <td><?php echo $row['Phone'] ?></td>
-                            <td><?php echo $row['Address'] ?></td>
-                            <td><?php echo $row['Company'] ?></td>
-                            <td><?php echo $row['Industry'] ?></td>
-                            <td>
-                                <a href="lib/show_tasks.php?customerid=<?php echo $row['CustomerID']; ?>" class="btn btn-success">View Tasks</a>
-                            </td>
-                        </tr>
-
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+            <!-- Customer Table -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Company</th>
+                                <th>Industry</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customer-data-table">
+                            <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
+                                <tr>
+                                    <td>#<?php echo $row['CustomerID'] ?></td>
+                                    <td><?php echo $row['Name'] ?></td>
+                                    <td><?php echo $row['Email'] ?></td>
+                                    <td>+88<?php echo $row['Phone'] ?></td>
+                                    <td><?php echo $row['Address'] ?></td>
+                                    <td><?php echo $row['Company'] ?></td>
+                                    <td><?php echo $row['Industry'] ?></td>
+                                    <td>
+                                        <!-- View Tasks Button -->
+                                        <a href="lib/show_tasks.php?customerid=<?php echo $row['CustomerID']; ?>" class="btn btn-success btn-sm shadow-sm">View Tasks</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-
-    <?php endif; ?>
     </div>
+</div>
+
+<?php endif; ?>
+
 
     <!-- Task Modal -->
     <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">

@@ -169,7 +169,7 @@ try {
                                             $status_icon = [
                                                 'pending' => '<span class="badge bg-warning"><i class="fas fa-clock"></i> Pending</span>',
                                                 'completed' => '<span class="badge bg-success"><i class="fas fa-check-circle"></i> Completed</span>',
-                                                'canceled' => '<span class="badge bg-danger"><i class="fas fa-times-circle"></i> Canceled</span>'
+                                                'cancelled' => '<span class="badge bg-danger"><i class="fas fa-times-circle"></i> Canceled</span>'
                                             ];
                                             echo $status_icon[$status] ?? '<span class="badge bg-secondary">Unknown</span>';
                                             ?>

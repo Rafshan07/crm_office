@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Footer Section -->
                 <div id="nav-footer" class="p-3">
                     <img src="./assets/image/user.png" alt="User">
-                    <h6><?= htmlspecialchars($user_name); ?></h6>
+                    <h6>Sales</h6>
                     <p>Sales</p>
                 </div>
                 <div class="nav-button">

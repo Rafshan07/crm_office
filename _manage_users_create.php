@@ -2,26 +2,10 @@
 session_start();
 require_once 'lib/database.php';
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-
     header("Location: index.php");
     exit();
 }
 
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>apcorn crm</title>
-</head>
-
-<?php
 $error = '';
 $success = '';
 
@@ -62,15 +46,19 @@ if ($_POST) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>apcorn crm</title>
+</head>
 
 <body class="adminpage">
-    <?php if (isset($error)) {
-        echo "<div class='alert alert-danger'>$error</div>";
-    } ?>
-    <?php if (isset($success)) {
-        echo "<div class='alert alert-success'>$success</div>";
-    } ?>
-
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -147,16 +135,18 @@ if ($_POST) {
 
     <div class="col-md-9 col-lg-10 p-4 right">
         <div class="mb-3">
-            <button class="btn btn-primary " onclick="location.href='staff_account.php'">Staff Create</button><br>
-            <button class="btn btn-primary " onclick="location.href='salesman_id.php'">Busnesses devoloper Create</button>
+            <button class="btn btn-primary " onclick="location.href='salesman_id.php'">Create Employee Account</button>
         </div>
         <h3>Customer Account</h3>
 
+        <!-- Display success or error messages -->
+        <?php if ($error): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php elseif ($success): ?>
+            <div class="alert alert-success"><?php echo $success; ?></div>
+        <?php endif; ?>
+
         <form action="" method="POST" enctype="multipart/form-data">
-            <!-- <div class="form-group customer-form-group">
-                <input type="text" class="form-control" id="customer-id" name="customer_id" placeholder=" " required>
-                <label for="customer-id">Customer ID</label>
-            </div> -->
             <div class="form-group customer-form-group">
                 <input type="text" class="form-control" id="name" name="name" placeholder=" " required>
                 <label for="name">Full Name</label>
@@ -185,17 +175,9 @@ if ($_POST) {
                 <input type="password" class="form-control" id="password" name="password" placeholder=" " required>
                 <label for="password">Password</label>
             </div>
-            <!-- Photo Upload Section -->
-            <!-- <div class="form-group customer-form-group">
-                <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
-                <label for="photo">Upload Photo</label>
-            </div> -->
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </form>
     </div>
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>

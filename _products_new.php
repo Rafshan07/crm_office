@@ -132,90 +132,118 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
     $query = "SELECT * FROM product";
     $read = $db->select($query);
-    ?>
-    <?php
+?>
+<?php
     if (isset($error)) {
-        echo $error;
+        echo "<div class='alert alert-danger' role='alert'>$error</div>";
     }
-    ?>
-    <div class="container right">
-        <div class="row">
-            <div class="col-md-9 col-lg-10 p-4">
-                <!-- Add Product Button -->
-                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button>
+?>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Card for Product List -->
+            <div class="card shadow-lg rounded-4">
+                <div class="card-body">
+                    <!-- Title -->
+                    <h2 class="text-center text-success mb-4">Product List</h2>
 
-                <!-- Product Table -->
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Product ID</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock Level</th>
-                            <th>Actions</th>
-                        </tr>
-                    <tbody>
-                        <?php if ($read) { ?>
+                    <!-- Add Product Button -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                            <i class="fas fa-plus-circle"></i> Add Product
+                        </button>
+                    </div>
 
-                            <?php
-                            $i = 1;
-                            while ($row = $read->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover shadow-sm rounded-3">
+                            <thead class="table-light">
                                 <tr>
-                                    <td><?php echo $row['ProductID'] ?></td>
-                                    <td><?php echo $row['Name'] ?></td>
-                                    <td><?php echo $row['Category'] ?></td>
-                                    <td><?php echo $row['Price'] ?></td>
-                                    <td><?php echo $row['StockLevel'] ?></td>
-                                    <td>
-                                        <a href="lib/editProduct.php?id=<?php echo $row['ProductID'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="lib/deleteProduct.php?id=<?php echo $row['ProductID'] ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-sm">Delete</a>
-                                    </td>
+                                    <th>Product ID</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Stock Level</th>
+                                    <th>Actions</th>
                                 </tr>
-
-                            <?php } ?>
-                        <?php } else { ?>
-                            <p>No Data Found!</p>
-                        <?php } ?>
-                    </tbody>
-
-                    </thead>
-                </table>
+                            </thead>
+                            <tbody>
+                                <?php if ($read): ?>
+                                    <?php while ($row = $read->fetch(PDO::FETCH_ASSOC)): ?>
+                                        <tr>
+                                            <td><?php echo $row['ProductID'] ?></td>
+                                            <td><?php echo $row['Name'] ?></td>
+                                            <td><?php echo $row['Category'] ?></td>
+                                            <td><?php echo $row['Price'] ?></td>
+                                            <td><?php echo $row['StockLevel'] ?></td>
+                                            <td>
+                                                <!-- Action Buttons with Icons -->
+                                                <a href="lib/editProduct.php?id=<?php echo $row['ProductID'] ?>" class="btn btn-warning btn-sm shadow-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Product">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <a href="lib/deleteProduct.php?id=<?php echo $row['ProductID'] ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Product">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center">No Data Found!</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Add Product Modal -->
     <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                    <h5 class="modal-title" id="addProductModalLabel"><i class="fas fa-plus-circle"></i> Add New Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="lib/addProduct.php" method="POST">
                         <div class="mb-3">
-                            <label for="Name" class="form-label">Product Name</label>
-                            <input type="text" class="form-control" id="Name" name="Name" required>
+                            <label for="productName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="productName" name="productName" required>
                         </div>
                         <div class="mb-3">
-                            <label for="Category" class="form-label">Category</label>
-                            <input type="text" class="form-control" id="Category" name="Category" required>
+                            <label for="category" class="form-label">Category</label>
+                            <input type="text" class="form-control" id="category" name="category" required>
                         </div>
                         <div class="mb-3">
-                            <label for="Price" class="form-label">Price</label>
-                            <input type="number" step="0.01" class="form-control" id="Price" name="Price" required>
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
                         </div>
                         <div class="mb-3">
-                            <label for="StockLevel" class="form-label">Stock Level</label>
-                            <input type="number" class="form-control" id="StockLevel" name="StockLevel" required>
+                            <label for="stockLevel" class="form-label">Stock Level</label>
+                            <input type="number" class="form-control" id="stockLevel" name="stockLevel" required>
                         </div>
-                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</button>
-
+                        <button type="submit" class="btn btn-success w-100">Add Product</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+</div>
+
+<script>
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
+
+
 
 
     <script src="./assets/js/product.js"></script>

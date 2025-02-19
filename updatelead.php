@@ -94,7 +94,7 @@ if (isset($_SESSION['user_id'])) {
                 <!-- Footer Section -->
                 <div id="nav-footer" class="p-3">
                     <img src="./assets/image/user.png" alt="User">
-                    <h6><?= htmlspecialchars($user_name); ?></h6>
+                    <h6>Sales</h6>
                     <p>Sales</p>
                 </div>
                 <div class="nav-button">
@@ -110,100 +110,106 @@ if (isset($_SESSION['user_id'])) {
     $db = new database();
     $query = "SELECT * FROM lead";
     $read = $db->select($query);
-    ?>
-    <?php
+?>
+<?php
     if (isset($error)) {
         echo $error;
     }
-    ?>
+?>
 
-    <div class="col-md-9 right">
-        <h3 class="mt-3">Leads Table</h3>
-        <?php
+<div class="col-md-9 right">
+    <h3 class="mt-3">Leads Table</h3>
+
+    <?php
         if (isset($_GET['success'])) {
             $successMessage = $_GET['success'];
             echo "<div class='alert alert-success'>$successMessage</div>";
         }
-        ?>
+    ?>
 
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Lead ID</th>
-                    <th>Source</th>
-                    <th>Status</th>
-                    <th>Assigned To</th>
-                    <th>Created Date</th>
-                    <th>Customer ID</th>
-                    <th>Actions</th>
-                </tr>
-                <?php if ($read) { ?>
-
-                    <?php
-                    $i = 1;
-                    while ($row = $read->fetch(PDO::FETCH_ASSOC)) { ?>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Lead ID</th>
+                        <th>Source</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Created Date</th>
+                        <th>Customer ID</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($read) { ?>
+                        <?php
+                            $i = 1;
+                            while ($row = $read->fetch(PDO::FETCH_ASSOC)) { ?>
+                                <tr>
+                                    <td><?php echo $row['LeadID']; ?></td>
+                                    <td><?php echo $row['Source']; ?></td>
+                                    <td><?php echo $row['Status']; ?></td>
+                                    <td><?php echo $row['AssignedTo']; ?></td>
+                                    <td><?php echo $row['CreateDate']; ?></td>
+                                    <td><?php echo $row['CustomerID']; ?></td>
+                                    <td>
+                                        <a href="lib/editLead.php?id=<?php echo $row['LeadID']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="lib/deleteLead.php?id=<?php echo $row['LeadID']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                    <?php } else { ?>
                         <tr>
-                            <td><?php echo $row['LeadID'] ?></td>
-                            <td><?php echo $row['Source'] ?></td>
-                            <td><?php echo $row['Status'] ?></td>
-                            <td><?php echo $row['AssignedTo'] ?></td>
-                            <td><?php echo $row['CreateDate'] ?></td>
-                            <td><?php echo $row['CustomerID'] ?></td>
-                            <td>
-                                <a href="lib/editLead.php?id=<?php echo $row['LeadID'] ?>" class="btn btn-warning">Edit</a>
-                                <a href="lib/deleteLead.php?id=<?php echo $row['LeadID'] ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger">Delete</a>
-                            </td>
+                            <td colspan="7" class="text-center text-muted">No Data Found</td>
                         </tr>
-
                     <?php } ?>
-                <?php } else { ?>
-                    <p>No Data Found!</p>
-                <?php } ?>
-            </thead>
-
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 
-    <!-- Update Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateModalLabel">Update Lead</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="update-form">
-                        <div class="mb-3">
-                            <label for="lead-id" class="form-label">Lead ID</label>
-                            <input type="text" class="form-control" id="lead-id" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lead-source" class="form-label">Source</label>
-                            <input type="text" class="form-control" id="lead-source" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lead-status" class="form-label">Status</label>
-                            <input type="text" class="form-control" id="lead-status" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lead-assigned-to" class="form-label">Assigned To</label>
-                            <input type="text" class="form-control" id="lead-assigned-to" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lead-created-date" class="form-label">Created Date</label>
-                            <input type="date" class="form-control" id="lead-created-date" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lead-customer-id" class="form-label">Customer ID</label>
-                            <input type="text" class="form-control" id="lead-customer-id" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Lead</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="update-form">
+                    <div class="mb-3">
+                        <label for="lead-id" class="form-label">Lead ID</label>
+                        <input type="text" class="form-control" id="lead-id" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lead-source" class="form-label">Source</label>
+                        <input type="text" class="form-control" id="lead-source" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lead-status" class="form-label">Status</label>
+                        <input type="text" class="form-control" id="lead-status" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lead-assigned-to" class="form-label">Assigned To</label>
+                        <input type="text" class="form-control" id="lead-assigned-to" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lead-created-date" class="form-label">Created Date</label>
+                        <input type="date" class="form-control" id="lead-created-date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lead-customer-id" class="form-label">Customer ID</label>
+                        <input type="text" class="form-control" id="lead-customer-id" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <script src="./assets/js/updateleads.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

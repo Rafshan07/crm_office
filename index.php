@@ -1,10 +1,10 @@
 <?php
 session_start();
-
-require 'lib/database.php';
+require_once 'lib/database.php';
 require_once 'lib/user.php';
 
 $error = "";
+$success = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = isset($_POST["email"]) ? filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL) : '';
@@ -13,43 +13,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($email) || empty($password)) {
     $error = "Email and Password are required!";
   } else {
-    $user = new user();
+    $user = new User();
     $role = $user->login($email, $password);
 
     if ($role) {
+      // Reset login attempts and set session variables
       $_SESSION['login_attempts'] = 0;
       $_SESSION['role'] = $role;
-      $_SESSION['userid'] = $user->getCustomerID($email);
+      $_SESSION['userid'] = $user->getUserIDByEmail($email); // Fetch UserID for staff/admin
 
+      // Redirect based on role
       switch ($role) {
         case "admin":
+          $success = "Login successful! Redirecting to admin dashboard...";
           header("Location: main.php");
           exit();
         case "sales":
+          $success = "Login successful! Redirecting to sales dashboard...";
           header("Location: sales.php");
           exit();
         case "staff":
-          header("Location: staff_account.php");
+          $success = "Login successful! Redirecting to staff dashboard...";
+          header("Location: staff_dashboard.php");
           exit();
         default:
           $error = "Unknown role!";
           break;
       }
     } elseif ($user->isCustomer($email, $password)) {
+      // Handle customer login
       $_SESSION['role'] = 'customer';
       $_SESSION['userid'] = $user->getCustomerID($email);
 
+      $success = "Login successful! Redirecting to customer dashboard...";
       header("Location: customer.php");
-
       exit();
     } else {
+      // Handle failed login attempts
       if (!isset($_SESSION['login_attempts'])) {
         $_SESSION['login_attempts'] = 0;
       }
       $_SESSION['login_attempts']++;
 
       if ($_SESSION['login_attempts'] > 5) {
-        $error = "Too many failed attempts!";
+        $error = "Too many failed attempts! Please try again later.";
       } else {
         $error = "Invalid Email or Password!";
       }
@@ -59,7 +66,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <?php if (!empty($error)): ?>
-  <div class="error"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></div>
+  <div class="alert alert-danger" role="alert">
+    <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
+  </div>
+<?php endif; ?>
+
+<?php if (!empty($success)): ?>
+  <div class="alert alert-success" role="alert">
+    <?php echo htmlspecialchars($success, ENT_QUOTES, 'UTF-8'); ?>
+  </div>
 <?php endif; ?>
 
 
@@ -94,13 +109,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </span>
           <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
         </div>
-        <button type="submit" class="btn btn-primary w-100 btn-animated" onclick="window.location.href='main.html';">
+        <button type="submit" class="btn btn-primary w-100 btn-animated">
           <i class="fas fa-sign-in-alt me-2"></i>Login
         </button>
       </form>
-      <p class="text-center mt-3">
-        <a href="#" class="text-decoration-none">Forgot password?</a>
-      </p>
     </div>
   </section>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>

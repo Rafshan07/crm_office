@@ -9,6 +9,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'sales') {
 
 $db = new database();
 
+
 $total_sales_query = "SELECT SUM(totalamount) as total_sales FROM `order` WHERE status = 'completed'";
 $total_sales_result = $db->select($total_sales_query);
 $total_sales = $total_sales_result ? $total_sales_result->fetch(PDO::FETCH_ASSOC)['total_sales'] : 0;
@@ -115,7 +116,7 @@ $order_status = $order_status_result ? $order_status_result->fetch(PDO::FETCH_AS
                 <!-- Footer Section -->
                 <div id="nav-footer" class="p-3">
                     <img src="./assets/image/user.png" alt="User">
-                    <h6><?= htmlspecialchars($user_name); ?></h6>
+                    <h6>Sales</h6>
                     <p>Sales</p>
                 </div>
                 <div class="nav-button">

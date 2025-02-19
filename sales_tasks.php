@@ -96,7 +96,7 @@ if (isset($_SESSION['user_id'])) {
                 <!-- Footer Section -->
                 <div id="nav-footer" class="p-3">
                     <img src="./assets/image/user.png" alt="User">
-                    <h6><?= htmlspecialchars($user_name); ?></h6>
+                    <h6>Sales</h6>
                     <p>Sales</p>
                 </div>
                 <div class="nav-button">
@@ -109,68 +109,76 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
     <?php
-    $db = new database();
     $query = "SELECT * FROM task";
     $read = $db->select($query);
-    ?>
-    <?php
+?>
+<?php
     if (isset($error)) {
-        echo $error;
+        echo "<div class='alert alert-danger'>$error</div>";
     }
-    ?>
-    <div class="col-md-9 col-lg-10 right">
-        <div class="d-flex justify-content-between align-items-center p-3">
-            <h2>Tasks</h2>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
-        </div>
-        <?php
-        if (isset($_GET['success'])) {
-            $successMessage = $_GET['success'];
-            echo "<div class='alert alert-success'>$successMessage</div>";
-        }
-        ?>
-        <div class="p-3">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Task ID</th>
-                        <th>Description</th>
-                        <th>Due Date</th>
-                        <th>Assigned To</th>
-                        <th>Customer ID</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($read) { ?>
+?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 right">
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="text-primary">Tasks</h2>
+                <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task</button>
+            </div>
 
-                        <?php
-                        $i = 1;
-                        while ($row = $read->fetch(PDO::FETCH_ASSOC)) { ?>
-                            <tr>
-                                <td><?php echo $row['TaskID'] ?></td>
-                                <td><?php echo $row['Description'] ?></td>
-                                <td><?php echo $row['DueDate'] ?></td>
-                                <td><?php echo $row['AssignedTo'] ?></td>
-                                <td><?php echo $row['RelatedCustomerID'] ?></td>
+            <!-- Success Message -->
+            <?php
+            if (isset($_GET['success'])) {
+                $successMessage = $_GET['success'];
+                echo "<div class='alert alert-success'>$successMessage</div>";
+            }
+            ?>
 
-                                <td>
-                                    <a href="lib/editTask.php?id=<?php echo $row['TaskID'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="lib/deleteTask.php?id=<?php echo $row['TaskID'] ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-sm">Delete</a>
-                                </td>
-                            </tr>
-
-                        <?php } ?>
-                    <?php } else { ?>
-                        <p>No Data Found!</p>
-                    <?php } ?>
-                </tbody>
-            </table>
+            <!-- Task Table -->
+            <div class="card shadow-lg rounded-3">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Task ID</th>
+                                    <th>Description</th>
+                                    <th>Due Date</th>
+                                    <th>Assigned To</th>
+                                    <th>Customer ID</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($read) { ?>
+                                    <?php
+                                    while ($row = $read->fetch(PDO::FETCH_ASSOC)) { ?>
+                                        <tr>
+                                            <td><?php echo $row['TaskID']; ?></td>
+                                            <td><?php echo $row['Description']; ?></td>
+                                            <td><?php echo $row['DueDate']; ?></td>
+                                            <td><?php echo $row['AssignedTo']; ?></td>
+                                            <td><?php echo $row['RelatedCustomerID']; ?></td>
+                                            <td>
+                                                <a href="lib/editTask.php?id=<?php echo $row['TaskID']; ?>" class="btn btn-warning btn-sm shadow-sm">Edit</a>
+                                                <a href="lib/deleteTask.php?id=<?php echo $row['TaskID']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-sm shadow-sm">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                } else { ?>
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No Data Found!</td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
     <?php
-
-    $db = new database();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $description = $_POST['description'];
